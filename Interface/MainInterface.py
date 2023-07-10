@@ -128,7 +128,7 @@ class MainInterface:
             sc = CalculationModule.CalculationEngine.getISC(a)
             cemenu = tkinter.Menu(ceconfigurationmenu)
             cemenu.add_command(label="Activar", command=partial(changece, sc))
-            cemenu.add_command(label="Configurar", command=sc.getConfigurationOptionsWindow)
+            cemenu.add_command(label="Configurar", command=sc.configurationOptionsWindow)
             ceconfigurationmenu.add_cascade(label=sc.getDescription()[0], menu=cemenu)
             pass
         self.barra_de_menus.add_cascade(label="Configuración motor de cálculo", menu=ceconfigurationmenu)
