@@ -1,8 +1,6 @@
-import datetime
 import tkinter
 from functools import partial
-from pydoc import text
-from tkinter import Tk, Label, Button, ttk, X, Y, RIGHT, BOTTOM
+from tkinter import Tk, Label, Button
 
 import dateutil.parser
 
