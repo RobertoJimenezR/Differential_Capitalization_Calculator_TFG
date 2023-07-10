@@ -3,8 +3,11 @@ from functools import partial
 
 
 class Table(tkinter.Frame):
-    def __init__(self, widget, heading, data, master=None, editablefields: list[bool] =None, readonly:bool= True):
-        """Generates a Frame within the Widget widget, which contains a table of data. The table has a scrollbar subscribed to the master scroll event. You can indicate editable fields with an editable Boolean list. By default it is indicated that readonly which would prevent alado and delete data, it can be made editable with readonly = False"""
+    def __init__(self, widget, heading, data, master=None, editablefields: list[bool] = None, readonly: bool = True):
+        """Generates a Frame within the Widget widget, which contains a table of data. The table has a scrollbar
+        subscribed to the master scroll event. You can indicate editable fields with an editable Boolean list. By
+        default it is indicated that readonly which would prevent alado and delete data, it can be made editable with
+        readonly = False """
 
         super().__init__(widget)
 
@@ -12,7 +15,7 @@ class Table(tkinter.Frame):
             """Deletes the selected row"""
             r.destroy()
             del dic[i]
-            self.dic=dic
+            self.dic = dic
 
         def addrow():
             """Add a new row"""
@@ -34,8 +37,10 @@ class Table(tkinter.Frame):
                 dic[0][i].set("")
                 i += 1
 
-            if not readonly: tkinter.Button(frameaux, text="Eliminar", command=partial(deleterow, frameaux, j)).grid(row=0,
-                                                                                                    column=i)
+            if not readonly:
+                tkinter.Button(frameaux, text="Eliminar", command=partial(deleterow, frameaux, j)).grid(
+                    row=0,
+                    column=i)
             dic[j] = dicaux
             frameaux.pack(side="bottom")
 
@@ -50,15 +55,14 @@ class Table(tkinter.Frame):
                 i += 1
             frameh.pack()
 
-        self.dic= {}
+        self.dic = {}
         dic = self.dic
 
         addheadings()
 
-
         dicaux = {}
 
-        if (not readonly):
+        if not readonly:
             frame0 = tkinter.Frame(widget)
             frameaux = tkinter.Frame(frame0)
             i = 0
@@ -120,15 +124,17 @@ class Table(tkinter.Frame):
                     dicaux[i] = tkinter.StringVar(frameaux, value=c)
                     tkinter.Entry(frameaux, textvariable=dicaux[i], state="readonly").grid(row=0, column=i)
                 i += 1
-            if not readonly: tkinter.Button(frameaux, text="Eliminar", command=partial(deleterow, frameaux, j)).grid(row=0, column=i)
+            if not readonly:
+                tkinter.Button(frameaux, text="Eliminar", command=partial(deleterow, frameaux, j)).grid(
+                    row=0, column=i)
             frameaux.pack(expand=1)
             dic[j] = dicaux
             j += 1
 
-
     def getlistedited(self):
-        listedited=[]
-        if 0 in self.dic.keys(): del self.dic[0]
+        listedited = []
+        if 0 in self.dic.keys():
+            del self.dic[0]
 
         for i in self.dic.keys():
             aux = []

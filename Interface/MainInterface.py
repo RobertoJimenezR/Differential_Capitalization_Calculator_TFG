@@ -10,17 +10,16 @@ from Interface.Table import Table
 
 
 class MainInterface:
-    currentSCCE = None
+    currentscce = None
 
     def __init__(self):
         self.dataimporter: DataImportModule.DataImporter
         self.dataimporter = None
         self.calculationengine: CalculationModule.CalculationEngine
         self.calculationengine = None
-        self.CFE = []
+        self.cfe = []
         self.dates = []
-        self.capitals=[]
-
+        self.capitals = []
 
         master = Tk()
         self.master = master
@@ -34,10 +33,10 @@ class MainInterface:
         self.dataimportconfiguration()
         master.config(menu=barra_de_menus)
 
-        frameoptions=tkinter.Frame(master)
+        frameoptions = tkinter.Frame(master)
         Label(frameoptions, text="Tipo de capitalización diferencial:").grid(row=0, column=0, rowspan=1, columnspan=1)
         self.clt = tkinter.StringVar()
-        self.clt.set(CalculationModule.CalculationEngine.capitalizationLawType)
+        self.clt.set(CalculationModule.CalculationEngine.capitalizationlawtype)
         tkinter.OptionMenu(frameoptions, self.clt, *CalculationModule.CalculationEngine.capitalizationLawOptions,
                            command=self.changesclt).grid(row=0, column=1, rowspan=1, columnspan=1)
         self.vsce = tkinter.StringVar(frameoptions)
@@ -45,30 +44,29 @@ class MainInterface:
         Label(frameoptions, textvariable=self.vsce).grid(row=0, column=2, rowspan=1, columnspan=1)
         frameoptions.pack()
 
-        framefunction=tkinter.Frame(master)
+        framefunction = tkinter.Frame(master)
         Label(framefunction, text="Función de capital:").grid(row=0, column=0, rowspan=1, columnspan=1)
-        self.cexpresion=tkinter.StringVar()
-        tkinter.Entry(framefunction,textvariable=self.cexpresion).grid(row=1, column=0, rowspan=1, columnspan=1)
+        self.cexpresion = tkinter.StringVar()
+        tkinter.Entry(framefunction, textvariable=self.cexpresion).grid(row=1, column=0, rowspan=1, columnspan=1)
         Label(framefunction, text="Función de tasa de actualización:").grid(row=0, column=1, rowspan=1, columnspan=1)
-        self.iexpresion=tkinter.StringVar()
-        tkinter.Entry(framefunction,textvariable=self.iexpresion).grid(row=1, column=1, rowspan=1, columnspan=1)
+        self.iexpresion = tkinter.StringVar()
+        tkinter.Entry(framefunction, textvariable=self.iexpresion).grid(row=1, column=1, rowspan=1, columnspan=1)
         Label(framefunction, text="Variable:").grid(row=0, column=2, rowspan=1, columnspan=1)
         self.variable = tkinter.StringVar()
         tkinter.Entry(framefunction, textvariable=self.variable).grid(row=1, column=2, rowspan=1, columnspan=1)
         framefunction.pack()
 
-
-        framelmit=tkinter.Frame(master)
+        framelmit = tkinter.Frame(master)
         Label(framelmit, text="Límite inferior:").grid(row=0, column=0, rowspan=1, columnspan=1)
-        self.lowerlimit=tkinter.StringVar()
-        tkinter.Entry(framelmit,textvariable=self.lowerlimit).grid(row=1, column=0, rowspan=1, columnspan=1)
+        self.lowerlimit = tkinter.StringVar()
+        tkinter.Entry(framelmit, textvariable=self.lowerlimit).grid(row=1, column=0, rowspan=1, columnspan=1)
         Label(framelmit, text="Límite superior:").grid(row=0, column=1, rowspan=1, columnspan=1)
-        self.upperlimit=tkinter.StringVar()
-        tkinter.Entry(framelmit,textvariable=self.upperlimit).grid(row=1, column=1, rowspan=1, columnspan=1)
+        self.upperlimit = tkinter.StringVar()
+        tkinter.Entry(framelmit, textvariable=self.upperlimit).grid(row=1, column=1, rowspan=1, columnspan=1)
         framelmit.pack()
 
         frameaccion = tkinter.Frame(master)
-        self.calculateB=Button(frameaccion, text="Calcular", command=self.calculate, state="disabled")
+        self.calculateB = Button(frameaccion, text="Calcular", command=self.calculate, state="disabled")
         self.calculateB.grid(row=0, column=0, rowspan=1, columnspan=1)
         Label(frameaccion, text="Gráfico de evolución del valor:").grid(row=0, column=1, rowspan=1, columnspan=1)
         self.graphicB = Button(frameaccion, text="Mostrar", command=self.showgraphic, state="disabled")
@@ -97,9 +95,7 @@ class MainInterface:
         self.tableB.grid(row=0, column=0, rowspan=1, columnspan=1)
         frameaccion.pack()
 
-
-        self.frametable=tkinter.Frame(master)
-
+        self.frametable = tkinter.Frame(master)
 
     def mainloop(self):
         self.master.mainloop()
@@ -107,11 +103,10 @@ class MainInterface:
     def main(self):
         main = tkinter.Menu(self.barra_de_menus)
         main.add_command(label="Importar datos de EFE", command=self.importdata)
-        main.add_command(label="Editar datos de EFE", command=self.editCF)
+        main.add_command(label="Editar datos de EFE", command=self.editcf)
         main.add_command(label="Editar fechas", command=self.editdates)
         main.add_command(label="Editar capitales", command=self.editcapitals)
         self.barra_de_menus.add_cascade(label="Inicio", menu=main)
-
 
     def calculationengineconfiguration(self):
         def changece(ce):
@@ -122,12 +117,12 @@ class MainInterface:
             self.master.update_idletasks()
 
         ceconfigurationmenu = tkinter.Menu(self.barra_de_menus)
-        for a in CalculationModule.CalculationEngine.getSC():
-            sc = CalculationModule.CalculationEngine.getISC(a)
+        for a in CalculationModule.CalculationEngine.getsubclass():
+            sc = CalculationModule.CalculationEngine.getsubclassinstance(a)
             cemenu = tkinter.Menu(ceconfigurationmenu)
             cemenu.add_command(label="Activar", command=partial(changece, sc))
-            cemenu.add_command(label="Configurar", command=sc.configurationOptionsWindow)
-            ceconfigurationmenu.add_cascade(label=sc.getDescription()[0], menu=cemenu)
+            cemenu.add_command(label="Configurar", command=sc.configurationoptionswindow)
+            ceconfigurationmenu.add_cascade(label=sc.getdescription()[0], menu=cemenu)
             pass
         self.barra_de_menus.add_cascade(label="Configuración motor de cálculo", menu=ceconfigurationmenu)
 
@@ -136,76 +131,75 @@ class MainInterface:
             self.dataimporter = di
 
         diconfigurationmenu = tkinter.Menu(self.barra_de_menus)
-        for a in DataImportModule.DataImporter.getSC():
-            di = DataImportModule.DataImporter.getISC(a)
+        for a in DataImportModule.DataImporter.getsubclasss():
+            di = DataImportModule.DataImporter.getsubclassinstance(a)
             dimenu = tkinter.Menu(diconfigurationmenu)
             dimenu.add_command(label="Activar", command=partial(changedi, di))
-            dimenu.add_command(label="Configurar", command=di.configurationOptionsWindow)
-            diconfigurationmenu.add_cascade(label=di.getDescription()[0], menu=dimenu)
+            dimenu.add_command(label="Configurar", command=di.configurationoptionswindow)
+            diconfigurationmenu.add_cascade(label=di.getdescription()[0], menu=dimenu)
         self.barra_de_menus.add_cascade(label="Configuración importación de datos", menu=diconfigurationmenu)
 
     def changesclt(self, optionvalue):
         if self.calculationengine is None:
             pass
         else:
-            self.calculationengine.capitalizationLawType = optionvalue
+            self.calculationengine.capitalizationlawtype = optionvalue
 
     def calculate(self):
         self.calculationengine.init(self.cexpresion.get(), self.iexpresion.get(), self.variable.get())
-        self.IIR.set(self.calculationengine.getIndefiniteIntegral())
+        self.IIR.set(self.calculationengine.getindefiniteintegral())
         self.IDR.set(
-            self.calculationengine.getDefiniteIntegral(float(self.lowerlimit.get()), float(self.upperlimit.get())))
+            self.calculationengine.getdefiniteintegral(float(self.lowerlimit.get()), float(self.upperlimit.get())))
 
     def showgraphic(self):
         """Shows the graphic evolution table"""
         self.calculationengine.init(self.cexpresion.get(), self.iexpresion.get(), self.variable.get())
-        self.calculationengine.definiteIntegralGraphic(float(self.lowerlimit.get()), float(self.upperlimit.get()))
+        self.calculationengine.definiteintegralgraphic(float(self.lowerlimit.get()), float(self.upperlimit.get()))
 
     def showvalueevolucion(self):
         """Shows the capital evolution table"""
 
-        data=[]
-        if self.capitals.__len__()>0:
-            delta = lambda y, d0: (y - d0).days
+        data = []
+        if self.capitals.__len__() > 0:
+            def substractdate(y, d0):
+                return (y - d0).days
             try:
                 d0 = dateutil.parser.parse(self.capitals[0][1], dayfirst=True)
                 df = dateutil.parser.parse(self.upperdatelimit.get(), dayfirst=True)
-                d=delta(df, d0)
+                d = substractdate(df, d0)
                 for r in self.capitals:
-                    lm = r[0]
                     self.calculationengine.init(r[2], self.iexpresion.get(), self.variable.get())
                     data.append([r[0], r[1], r[2],
-                                 self.calculationengine.getDefiniteIntegral(
-                                     delta(dateutil.parser.parse(r[1], dayfirst=True), d0),d)])
+                                 self.calculationengine.getdefiniteintegral(
+                                     substractdate(dateutil.parser.parse(r[1], dayfirst=True), d0), d)])
             except Exception as e:
                 print("Algún error ha ocurrido con las fechas")
                 print(e)
         self.frametable.destroy()
-        self.frametable=tkinter.Frame(self.master)
+        self.frametable = tkinter.Frame(self.master)
         Table(self.frametable, ["Momento", "Fecha", "Capital aportado", "Valor del capital"], data, self.master)
         self.frametable.pack()
         self.calculationengine.init(self.cexpresion.get(), self.iexpresion.get(), self.variable.get())
 
     def importdata(self):
-        self.dataimporter.importDataWindow()
+        self.dataimporter.importdatawindow()
 
-    def editCF(self):
+    def editcf(self):
         """Opens a window that allows you to edit the cash flow"""
 
-
         def order():
-            saveChangesExit()
-            self.editCF()
+            savechangesexit()
+            self.editcf()
 
-        def saveChangesExit():
-            self.CFE=MainInterface.orderbydate(table.getlistedited(),0)
+        def savechangesexit():
+            self.cfe = MainInterface.orderbydate(table.getlistedited(), 0)
             master.destroy()
 
-        def saveChangesExitContinue():
-            saveChangesExit()
+        def savechangesexitcontinue():
+            savechangesexit()
             self.editdates()
 
-        self.CFE=MainInterface.orderbydate(self.dataimporter.getCFEntryList(),0)
+        self.cfe = MainInterface.orderbydate(self.dataimporter.getcfentrylist(), 0)
 
         master = tkinter.Toplevel()
         master.title("Editar movimientos de flujo de efectivo")
@@ -214,28 +208,28 @@ class MainInterface:
         frame.pack(side="top")
 
         Button(frame, text="Cerrar", command=master.destroy).pack(side=tkinter.RIGHT)
-        Button(frame, text="Guardar y cerrar", command=saveChangesExit).pack(side=tkinter.RIGHT)
-        Button(frame, text="Guardar y continuar", command=saveChangesExitContinue).pack(side=tkinter.RIGHT)
+        Button(frame, text="Guardar y cerrar", command=savechangesexit).pack(side=tkinter.RIGHT)
+        Button(frame, text="Guardar y continuar", command=savechangesexitcontinue).pack(side=tkinter.RIGHT)
         Button(frame, text="Ordenar", command=order).pack(side=tkinter.RIGHT)
 
         frame = tkinter.Frame(master)
         frame.pack(fill=tkinter.BOTH, expand=1)
-        table = Table(frame, ["Fecha", "Descripción", "Importe", "Categoría", "Subcategoría"], self.CFE, master=self.master, editablefields=[True, True, True, True, True], readonly=False)
+        table = Table(frame, ["Fecha", "Descripción", "Importe", "Categoría", "Subcategoría"], self.cfe,
+                      master=self.master, editablefields=[True, True, True, True, True], readonly=False)
 
     def editdates(self):
         """Opens a window that allows you to edit the dates"""
 
-
         def order():
-            saveChangesExit()
+            savechangesexit()
             self.editdates()
 
-        def saveChangesExit():
-            self.dates=MainInterface.orderbydate(table.getlistedited(),1, True)
+        def savechangesexit():
+            self.dates = MainInterface.orderbydate(table.getlistedited(), 1, True)
             master.destroy()
 
-        def saveChangesExitContinue():
-            saveChangesExit()
+        def savechangesexitcontinue():
+            savechangesexit()
             self.entrybydate()
             self.editcapitals()
 
@@ -246,27 +240,28 @@ class MainInterface:
         frame.pack(side="top")
 
         Button(frame, text="Cerrar", command=master.destroy).pack(side=tkinter.RIGHT)
-        Button(frame, text="Guardar y cerrar", command=saveChangesExit).pack(side=tkinter.RIGHT)
-        Button(frame, text="Guardar y continuar", command=saveChangesExitContinue).pack(side=tkinter.RIGHT)
+        Button(frame, text="Guardar y cerrar", command=savechangesexit).pack(side=tkinter.RIGHT)
+        Button(frame, text="Guardar y continuar", command=savechangesexitcontinue).pack(side=tkinter.RIGHT)
         Button(frame, text="Ordenar", command=order).pack(side=tkinter.RIGHT)
 
         frame = tkinter.Frame(master)
         frame.pack(fill=tkinter.BOTH, expand=1)
-        table = Table(frame, ["Index", "Fecha"], self.dates, master=self.master, editablefields=[False, True], readonly=False)
+        table = Table(frame, ["Index", "Fecha"], self.dates, master=self.master, editablefields=[False, True],
+                      readonly=False)
 
     def editcapitals(self):
         """Opens a window that allows you to edit the capitals"""
         def order():
-            saveChangesExit()
+            savechangesexit()
             self.editcapitals()
 
-        def saveChangesExit():
+        def savechangesexit():
             self.capitals = MainInterface.orderbydate(table.getlistedited(), 1, True)
             master.destroy()
 
-        def saveChangesExitContinue():
-            saveChangesExit()
-            nexpr=self.calculationengine.getgeneratecapitalfunction(self.capitals)
+        def savechangesexitcontinue():
+            savechangesexit()
+            nexpr = self.calculationengine.getgeneratecapitalfunction(self.capitals)
             self.cexpresion.set(nexpr[0])
             self.variable.set(nexpr[1])
             self.lowerlimit.set("0")
@@ -281,16 +276,17 @@ class MainInterface:
         frame.pack(side="top")
 
         Button(frame, text="Cerrar", command=master.destroy).pack(side=tkinter.RIGHT)
-        Button(frame, text="Guardar y cerrar", command=saveChangesExit).pack(side=tkinter.RIGHT)
-        Button(frame, text="Guardar y continuar", command=saveChangesExitContinue).pack(side=tkinter.RIGHT)
+        Button(frame, text="Guardar y cerrar", command=savechangesexit).pack(side=tkinter.RIGHT)
+        Button(frame, text="Guardar y continuar", command=savechangesexitcontinue).pack(side=tkinter.RIGHT)
         Button(frame, text="Ordenar", command=order).pack(side=tkinter.RIGHT)
 
         frame = tkinter.Frame(master)
         frame.pack(fill=tkinter.BOTH, expand=1)
-        table = Table(frame, ["Index", "Fecha", "Capital"], self.capitals, master=self.master, editablefields=[False, True,True], readonly=False)
+        table = Table(frame, ["Index", "Fecha", "Capital"], self.capitals, master=self.master,
+                      editablefields=[False, True, True], readonly=False)
 
     @classmethod
-    def orderbydate(cls, data, i, index: bool= False):
+    def orderbydate(cls, data, i, index: bool = False):
         """Sorts the Data list by the date of its records, and indicates the position of the date within the records"""
         data.sort(key=lambda x: dateutil.parser.parse(x[i], dayfirst=True))
         if not index:
@@ -298,18 +294,18 @@ class MainInterface:
                 try:
                     r[i] = dateutil.parser.parse(r[i], dayfirst=True).strftime("%d/%m/%Y")
                 except ValueError as e:
-                    print("Error capturado en la fecha "+r[i]+"\n"+ e.__str__())
+                    print("Error capturado en la fecha "+r[i]+"\n" + e.__str__())
                     data.remove(r)
             return data
         else:
-            res=[]
-            j=0
+            res = []
+            j = 0
             for r in data:
                 try:
                     r[i] = dateutil.parser.parse(r[i], dayfirst=True).strftime("%d/%m/%Y")
-                    aux=[j]
+                    aux = [j]
                     aux.extend(r[1:])
-                    j+=1
+                    j += 1
                     res.append(aux)
                 except ValueError as e:
                     print("Error capturado en la fecha " + r[i] + "\n" + e.__str__())
@@ -319,21 +315,26 @@ class MainInterface:
 
     def entrybydate(self):
         """Group cash flows by dates"""
-        dates=self.dates
-        cfentry=self.CFE
-        tcapitals={}
-        self.capitals=[]
+        dates = self.dates
+        cfentry = self.cfe
+        tcapitals = {}
+        self.capitals = []
 
-        interval = lambda x,y, z: dateutil.parser.parse(x, dayfirst=True)<=dateutil.parser.parse(y, dayfirst=True) and dateutil.parser.parse(y, dayfirst=True)<dateutil.parser.parse(z, dayfirst=True)
-        if dates.__len__()>=2:
+        def interval(x, y, z):
+            return dateutil.parser.parse(x, dayfirst=True) <= dateutil.parser.parse(y, dayfirst=True)\
+                   < dateutil.parser.parse(z, dayfirst=True)
+
+        if dates.__len__() >= 2:
             for i in range(0, dates.__len__()-1):
-                s=True
+                s = True
                 for j in cfentry:
-                    if(interval(dates[i][1], j[0], dates[i+1][1])):
+                    if interval(dates[i][1], j[0], dates[i + 1][1]):
 
-                        if s:tcapitals[i]=float(j[2])
-                        else: tcapitals[i]+=float(j[2])
-                        s=False
+                        if s:
+                            tcapitals[i] = float(j[2])
+                        else:
+                            tcapitals[i] += float(j[2])
+                        s = False
 
             for k in tcapitals.keys():
                 self.capitals.append([k+1, dates[k+1][1], tcapitals[k]])

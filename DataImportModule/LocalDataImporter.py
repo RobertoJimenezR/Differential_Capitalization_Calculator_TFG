@@ -15,7 +15,7 @@ class LocalDataImporter(DataImporter):
         self.delimiter = ";"
         self.CFEntry = []
 
-    def configurationOptionsWindow(self) -> None:
+    def configurationoptionswindow(self) -> None:
         di = self
 
         class ConfInterface:
@@ -69,7 +69,7 @@ class LocalDataImporter(DataImporter):
 
         ConfInterface()
 
-    def importDataWindow(self):
+    def importdatawindow(self):
         file_name = askopenfilename()
         df = pandas.read_csv(file_name, delimiter=self.delimiter, header=None)
         self.CFEntry = []
@@ -204,8 +204,8 @@ class LocalDataImporter(DataImporter):
 
         CFfilter()
 
-    def getCFEntryList(self) -> [[]]:
+    def getcfentrylist(self) -> [[]]:
         return self.CFEntry
 
-    def getDescription(self):
+    def getdescription(self):
         return self.title, self.description

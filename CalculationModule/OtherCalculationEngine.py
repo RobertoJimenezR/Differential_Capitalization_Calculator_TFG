@@ -1,25 +1,25 @@
-from tkinter import Tk, Label, Button
+from tkinter import Tk, Label
 
 from CalculationModule import CalculationEngine
-
 
 
 class OtherCalculationEngine(CalculationEngine):
     title = "Otro motor de cálculo local"
     description = "Otro motor"
-    def __init__(self, capitalFunction: str, interestFunction: str, variable: str, capitalizationLawType: str):
-        super().__init__(capitalFunction, interestFunction, variable, capitalizationLawType)
 
-    def getIndefiniteIntegral(self) -> str:
+    def __init__(self, capitalfunction: str, interestfunction: str, variable: str, capitalizationlawtype: str):
+        super().__init__(capitalfunction, interestfunction, variable, capitalizationlawtype)
+
+    def getindefiniteintegral(self) -> str:
         return ""
 
-    def getDefiniteIntegral(self, lowerLimit: float, upperLimit: float) -> float:
+    def getdefiniteintegral(self, lowerlimit: float, upperlimit: float) -> float:
         return 0
 
-    def definiteIntegralGraphic(self, lowerLimit: float, upperLimit: float) -> None:
+    def definiteintegralgraphic(self, lowerlimit: float, upperlimit: float) -> None:
         return None
 
-    def configurationOptionsWindow(self) -> None:
+    def configurationoptionswindow(self) -> None:
         class ConfInterface:
             def __init__(self):
                 master = Tk()

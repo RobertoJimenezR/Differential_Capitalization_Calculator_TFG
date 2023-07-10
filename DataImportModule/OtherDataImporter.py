@@ -8,14 +8,14 @@ class OtherDataImporter(DataImporter):
     def __init__(self):
         pass
 
-    def configurationOptionsWindow(self) -> None:
+    def configurationoptionswindow(self) -> None:
         pass
 
-    def importDataWindow(self):
+    def importdatawindow(self):
         pass
 
-    def getCFEntryList(self) -> [[]]:
+    def getcfentrylist(self) -> [[]]:
         pass
 
-    def getDescription(self):
-        return (self.title, self.description)
+    def getdescription(self):
+        return self.title, self.description

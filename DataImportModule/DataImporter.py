@@ -11,34 +11,36 @@ class DataImporter(ABC):
         pass
 
     @abstractmethod
-    def configurationOptionsWindow(self) -> None:
+    def configurationoptionswindow(self) -> None:
         """Runs a window where you can configure the options of each instance of the corresponding subclass"""
         pass
 
     @abstractmethod
-    def importDataWindow(self):
+    def importdatawindow(self):
         """Runs a window to perform the import"""
         pass
 
     @abstractmethod
-    def getCFEntryList(self) -> [[]]:
-        """Returns a list of expected cash flow movements. The list must be returned must be a list of a 5-tuple [Date, Description, Amount, Category, Subcategory]"""
+    def getcfentrylist(self) -> [[]]:
+        """Returns a list of expected cash flow movements. The list must be returned must be a list of a 5-tuple [
+        Date, Description, Amount, Category, Subcategory] """
         pass
+
     @classmethod
-    def getSC(cls):
+    def getsubclasss(cls):
         """Returns a list of available subclasses. These subclasses must be imported before calling this method."""
         return DataImporter.__subclasses__()
 
     @classmethod
-    def getISC(cls, SC):
-        """Returns an instance of the sublcase indicated in SC"""
-        if SC in cls.getSC():
-            aux=DataImporter.__new__(SC)
+    def getsubclassinstance(cls, sc):
+        """Returns an instance of the sublcase indicated in subclass"""
+        if sc in cls.getsubclasss():
+            aux = DataImporter.__new__(sc)
             aux.__init__()
             return aux
         return None
 
     @abstractmethod
-    def getDescription(self):
+    def getdescription(self):
         """Returns a 2-tuple with the title and description of the subclass"""
-        return (self.title, self.description)
+        return self.title, self.description
